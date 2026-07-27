@@ -1,0 +1,635 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="BlackTie Free Bootstrap Theme">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="img/png/icon/ico.ico" type="image/vnd.microsoft.icon" />
+    <title>CERECETT - Autentico Helado Artesanal</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <style type="text/css">
+        html
+        {
+            height: 100%;
+        }
+        body
+        {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map-canvas
+        {
+            height: 100%;
+        }
+    </style>
+    <style>
+        img.pequeña
+        {
+            height: auto;
+            width: auto;
+        }
+        img.pequeña64
+        {
+            width: 64px;
+            height: 64px;
+        }
+        img.grande
+        {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    <style>
+        .btn-cerecett {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 28px 10px 10px;
+            background: linear-gradient(180deg,#f01d54 0%,#c91443 100%);
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Trebuchet MS',sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            border: 4px solid #ffffff;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(204,20,63,.35), inset 0 2px 3px rgba(255,255,255,.25);
+            transition: .35s;
+        }
+
+            .btn-cerecett:hover {
+                transform: translateY(-4px) scale(1.03);
+                box-shadow: 0 14px 30px rgba(204,20,63,.45), inset 0 2px 5px rgba(255,255,255,.35);
+            }
+
+            .btn-cerecett img {
+                width: 52px;
+                height: 52px;
+                padding: 6px;
+                background: #fff;
+                border-radius: 50%;
+                border: 3px solid #ffe5ec;
+                object-fit: contain;
+                box-shadow: 0 4px 10px rgba(0,0,0,.20), inset 0 2px 4px rgba(255,255,255,.9);
+                transition: .35s;
+            }
+
+            .btn-cerecett:hover img {
+                transform: rotate(-8deg) scale(1.12);
+                box-shadow: 0 8px 18px rgba(0,0,0,.28), 0 0 15px rgba(255,255,255,.8);
+            }
+
+            .btn-cerecett span {
+                text-shadow: 0 2px 4px rgba(0,0,0,.25);
+            }
+    </style>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        function initialize() {
+            var latlng = new google.maps.LatLng(-27.7577296, -64.2287477);
+            var settings = {
+                zoom: 12,
+                center: latlng,
+                mapTypeControl: true,
+                mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.DROPDOWN_MENU },
+                navigationControl: true,
+                navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL },
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"), settings);
+            var infowindow = new google.maps.InfoWindow({
+
+        });
+
+        var companyImage = new google.maps.MarkerImage('images/logo.png',
+					new google.maps.Size(100, 50),
+					new google.maps.Point(0, 0),
+					new google.maps.Point(50, 50)
+				);
+
+        var companyShadow = new google.maps.MarkerImage('images/logo_shadow.png',
+					new google.maps.Size(130, 50),
+					new google.maps.Point(0, 0),
+					new google.maps.Point(65, 50));
+
+        var companyPos = new google.maps.LatLng(-27.787636, -64.261042);
+
+        var companyMarker = new google.maps.Marker({
+            position: companyPos,
+            map: map,
+            icon: companyImage,
+            shadow: companyShadow,
+            title: "Cerecett",
+            zIndex: 3
+        });
+        google.maps.event.addListener(companyMarker, 'click', function () {
+            infowindow.open(map, companyMarker);
+        });
+
+
+
+
+
+        var trainImage = new google.maps.MarkerImage('images/logo.png',
+					new google.maps.Size(50, 50),
+					new google.maps.Point(0, 0),
+					new google.maps.Point(50, 50)
+				);
+
+        var trainShadow = new google.maps.MarkerImage('images/logo_shadow.png',
+					new google.maps.Size(70, 50),
+					new google.maps.Point(0, 0),
+					new google.maps.Point(60, 50)
+				);
+
+        var trainPos = new google.maps.LatLng(-27.733685, -64.240599);
+
+        var trainMarker = new google.maps.Marker({
+            position: trainPos,
+            map: map,
+            icon: trainImage,
+            shadow: trainShadow,
+            title: "Train Station",
+            zIndex: 2
+        });
+
+        var parkingImage = new google.maps.MarkerImage('images/logo.png',
+					new google.maps.Size(50, 50),
+					new google.maps.Point(0, 0),
+					new google.maps.Point(50, 50)
+				);
+
+        var parkingShadow = new google.maps.MarkerImage('images/logo_shadow.png',
+					new google.maps.Size(70, 50),
+					new google.maps.Point(0, 0),
+					new google.maps.Point(60, 50)
+				);
+
+        var parkingPos = new google.maps.LatLng(-27.814587, -64.248546);
+
+        var parkingMarker = new google.maps.Marker({
+            position: parkingPos,
+            map: map,
+            icon: parkingImage,
+            shadow: parkingShadow,
+            title: "Parking Lot",
+            zIndex: 1
+        });
+
+        google.maps.event.addListener(companyMarker, 'click', function () {
+            infowindow.open(map, companyMarker);
+        });
+    }
+		</script>
+</head>
+<body onload="initialize()" bgcolor="white">
+    <!-- Cabezal-->
+    <img src="img/png/cabezal.png" class="img-responsive" style="background-color: #FFFFFF" />
+    <div class="container-fluid" style="background-color: #FFFFFF;">
+        <div class="col-lg-4">
+            <img src="img/png/logo.png" width="50%" class="img-responsive" />
+        </div>
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-4">
+            <br />
+            <div class="caja-redes img-responsive">
+                <!--<a href="https://www.facebook.com/cerecett.heladerias/?fref=ts" target="_blank" class="icon-button"><i>
+                                    <img src="img/png/social f.png" class="img-responsive" width="80%" /></i><span></span></a>&nbsp;&nbsp;
+                -->
+                <a href="https://www.facebook.com/cerecett/?fref=ts" target="_blank" class="icon-button">
+                    <i>
+                        <img src="img/png/social f.png" class="img-responsive" width="80%" />
+                    </i><span></span>
+                </a>&nbsp;&nbsp;
+                <a href="https://twitter.com/cerecett" target="_blank" class="icon-button">
+                    <i>
+                        <img src="img/png/social t.png" class="img-responsive" width="80%" />
+                    </i><span></span>
+                </a>&nbsp;&nbsp;
+                <!--<a href="http://tofo.me/tag/CERECETT" target="_blank" class="icon-button"><i>
+                         <img src="img/png/social i.png" class="img-responsive" width="80%" /></i><span></span></a>&nbsp;&nbsp;
+                -->
+                <a href="https://www.instagram.com/cerecett/" target="_blank" class="icon-button">
+                    <i>
+                        <img src="img/png/social i.png" class="img-responsive" width="80%" />
+                    </i><span></span>
+                </a>&nbsp;&nbsp;
+                <!--<a href="https://plus.google.com/104901416457383671856/posts" target="_blank" class="icon-button">
+                    <i>
+                        <img src="img/png/social g.png" class="img-responsive" width="80%" />
+                    </i><span></span>
+                </a>&nbsp;&nbsp;-->
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="background-color: #FFFFFF;">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-10 text-center">
+            <img src="img/ClubCerecet/REGISTRATE.jpg" class="img-responsive" />
+            <!--<h2> Te gustaría ser parte de Club Cerecett?</h2>
+            <Br />
+            <h3>Es el programa que te permite sumar PUNTOS mediante tu compra para luego canjearlos y participar de exclusivos BENEFICIOS!!!</h3>
+            <h3>Luego de registrado, con tu DNI SUMAS PUNTOS en tus compras</h3>
+            -->
+            <!--  <br />
+            <img src="img/ClubCerecet/PREMIOS WEB-2.jpg" class="container-fluid"" />
+            <br />-->
+            <br />
+
+            <!-- <img src="img/ClubCerecet/PREMIOS WEB-2.jpg" class="img-responsive" />
+             <hr />-->
+            <a href="http://181.93.190.163:5580/" class="btn btn-danger" target="_blank">Ingresa y Regístrate</a>
+            <br />
+            <br />
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <br />
+    </div>
+    <div class="container-fluid" style="background-color: #FFFFFF;">
+        <div class="col-lg-3">
+        </div>
+        
+        <div class="col-lg-6 text-center">
+            <!--<p>Descarga nuesta App</p>
+            <br />-->
+            <div class="text-center">
+                <!--<a href="https://play.google.com/store/apps/details?id=com.Cerecett&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" target="_blank" class="btn-group"><img src="img/Android.png" /> </a>
+    <a href="https://apps.apple.com/ar/app/cerecett/id1442097265" target="_blank" class="btn-group"><img src="img/IOS.png" /> </a>-->
+                <!--<a href="http://181.93.190.163:5580/" class="btn btn-danger" target="_blank">Sumate a nuestra empresa</a>-->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScogK-4N1lSJALcSDaTRhXw6Pibj2fXTHQBvbGBFbWAXh6mBw/viewform?usp=header" class="btn-cerecett" target="_blank">
+                    <img src="img/logo.png" alt="Helado">
+                    <span>Súmate a nuestra empresa</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+        </div>
+    </div>
+
+            <div class="container-fluid" style="background-color: #FFFFFF;">
+                <div class="row">
+                    <!--Inicio-->
+                    <div id="bestCarsCarousel" class="carousel slide" data-ride="carousel" style="background-image: url('./img/png/Fondoarribaabajo.png');
+                background-repeat: no-repeat;">
+                        <!-- Wrapper for slides  -->
+                        <div class="carousel-inner container">
+                            <div class="item active">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <img src="img/helados/1.png" class="img-responsive pequeña">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <img src="img/helados/2.png" class="img-responsive pequeña">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <img src="img/helados/3.png" class="img-responsive pequeña">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <img src="img/helados/4.png" class="img-responsive pequeña">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <img src="img/helados/5.png" class="img-responsive pequeña">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <img src="img/helados/6.png" class="img-responsive pequeña">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <img src="img/helados/7.png" class="img-responsive pequeña">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <!--Texto-->
+            <div class="container-fluid" style="background-color: #FFFFFF; text-align: center;">
+                <div class="row">
+                    <!--Inicio-->
+                    <div id="Div1" class="carousel slide" data-ride="carousel" style="background-repeat: no-repeat;
+                background-color: #FFFFFF;">
+                        <!-- Wrapper for slides  -->
+                        <div class="carousel-inner container">
+                            <div class="item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <h2>
+                                                Cerecett
+                                            </h2>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            Somos una empresa familiar que desde 1991 comparte con todos los santiagueños su
+                                            tradicional fórmula de helados artesanales, traída por nuestros abuelos desde Italia.
+                                            Trabajamos diariamente para mantener la calidad por la que nos eligen nuestros clientes
+                                            generación tras generación.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item active">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <h2>
+                                                Fresco y natural
+                                            </h2>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            Los helados Cerecett son fabricados con la mejor materia prima. Fruta seleccionada
+                                            y leche fresca se combinan en nuestra tradicional receta, con los últimos avances
+                                            en tecnología, para elaborar el auténtico helado artesanal.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <h2>
+                                                Especialidades
+                                            </h2>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            Además de nuestros helados artesanales, ofrecemos un amplio surtido de postres y
+                                            especialidades, tortas, bombones, palitos frutales, y una alternativa light de helados
+                                            libres de azúcar y bajas calorías. Nuevos productos, con la calidad de siempre.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+
+    <div class="container-fluid" style="background-color: #FFFFFF;">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-10">
+            <br>
+            <hr>
+            <h2>¿COMO FUNCIONA?</h2>
+            <br>
+            <h3>$3 = PUNTO CERECETT</h3>
+            <p>
+                Por cada $3 de compra acumulas un punto en CLUB CERECETT. Puedes canjear los mismos encualquiera de nuestros 	locales.
+                Además participas de exclusivos beneficios como sorteos, regalos, dctos., etc.
+            </p>
+            <br>
+
+            <strong><h2>Condiciones de uso</h2></strong>
+            <br>
+
+            <h3>Alta de miembros</h3>
+            <p>
+                El cliente, ingresando a www.cerecett.com.ar, deberá registrarse gratuitamente en el sistema completando los datos solicitados. Una vez realizada dicha operación, estará habilitado a partir del día siguiente a sumar puntos en su cuenta.
+                Además, es condición necesaria para la acumulación de puntos ser fan/seguidor de nuestras redes sociales (Facebook, Twitter e Instagram).
+            </p>
+
+            <br>
+
+            <h3>Acumulación de puntos</h3>
+            <p>
+                El encargado del local solicitará el DNI del cliente antes de realizar una operación de compra, de esta manera el sistema calculará automáticamente los puntos a sumar al ingresar el nuevo pedido.
+                Por cada $3 de compra se acumulará 1 punto para canjear por nuestros premios.
+                Los beneficios no son acumulables con otras promociones.
+            </p>
+
+            <br>
+
+            <h3>Vencimiento de puntos</h3>
+            <p>Los puntos tendrán una validez de 12 meses (1 año), venciéndose mes a mes. A medida que el cliente canjea sus puntos, el sistema descuenta aquellos acumulados con mayor anterioridad.</p>
+
+            <br>
+
+            <h3>Canje de puntos</h3>
+            <p>
+                El cliente presentará su DNI al encargado del local, luego elegirá el producto a canjear y se imprimirá el canje de puntos, que el Cliente deberá firmar para recibir el producto.
+                El cliente puede acumular puntos y canjearlos en el mismo momento; es decir, realizar la operación de compra, suma y en una operación siguiente el canje.
+                Los canjes solo serán presénciales.
+            </p>
+
+            <br>
+
+            <h3>Consulta de puntos</h3>
+            <p>Los puntos se pueden consultar en locales CERECETT con DNI.</p>
+
+
+            <br>
+            <hr>
+
+            <h2>Preguntas Frecuentes</h2>
+            <br>
+            <h3>¿Cómo debo hacer para cambiar mis puntos por productos?</h3>
+            <p>Presentado el DNI en cualquier local de CERECETT.</p><p>
+            </p><h3>¿Cómo puedo adherirme al programa?</h3>
+            <p>La adhesión es gratuita y se realiza ingresando a www.cerecett.com.ar</p><p>
+            </p><h3>¿Cómo puedo saber cuántos puntos tengo?</h3>
+            <p>Podrá consultar sus puntos acumulados en cualquier local de CERECETT presentando su DNI.</p><p>
+            </p><h3>¿Cómo suman los puntos?</h3>
+            <p>$3 pesos de compra = 1 punto</p><p>
+            </p><h3>¿Cuándo vencen los puntos?</h3>
+            <p>Los puntos acumulados tienen vigencia de 1 año a partir de la operación de compra.</p><p>
+            </p><h3>¿Debo abonar algo para participar del Programa CLUB CERECETT?</h3>
+            <p>No, el Programa CLUB CERECETT no tiene cargo adicional, la adhesión es gratuita.</p><p>
+            </p><h3>¿Dónde puedo canjear mis puntos?</h3>
+            <p>En cualquier local CERECETT.</p><p>
+            </p><h3>¿Se envían canje de puntos por productos a domicilio?</h3>
+            <p>No, deben ser canjeados únicamente en locales.</p><p>
+            </p><h3>¿Con qué beneficios cuento al asociarme a CLUB CERECETT?</h3>
+            <p>Además de la acumulación de puntos, te brinda la posibilidad de acceder, en diferentes oportunidades, a obsequios, descuentos y beneficios diferenciales para socios de CLUB CERECETT, así como de mantenerte informado de las novedades sobre nuestros productos y servicios.</p><p>
+
+            </p><hr>
+
+
+            <br>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <br>
+    </div>
+
+    <div class="container-fluid" style="background-color: #FFFFFF; text-align: center;">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-10">
+            <br>
+            <img src="img/ClubCerecet/PREMIOS WEB sinpts-2.jpg" class="img-responsive">
+            <br>
+            <br>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <br>
+    </div>
+
+             <div class="container-fluid" style="background-color: White">
+        <br />
+        <div class="row">
+            <div class="container" style="background-color: White">
+                <div class="col-lg-3">
+                    <div id="bljaIMGte">
+                        <img src="img/png/cartelito.png" class="img-responsive" />
+                        <div class="bljaIMGtex">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                </div>
+            </div>
+        </div>
+        <br />
+
+      
+
+
+
+                    <div class="container-fluid" style="background-color: White">
+                        <div class="row">
+                            <div class="container-fluid">
+                                <div class="col-lg-4">
+                                    <div class="col-lg-2">
+                                        <img src="img/png/icon/logo.png" />
+                                    </div>
+                                    <div class="col-lg-1">
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <h3>
+                                                <legend><strong>Sucursal Libertad</strong></legend>
+                                            </h3>
+                                            <h4>
+                                                <p>
+                                                    <strong>Dirección:</strong> Libertad 525
+                                                </p>
+                                            </h4>
+                                            <h4>
+                                                <p>
+                                                    <strong>Telefono:</strong> 4226463
+                                                </p>
+                                            </h4>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="col-lg-2">
+                                        <img src="img/png/icon/logo.png" />
+                                    </div>
+                                    <div class="col-lg-1">
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <h3>
+                                                <legend><strong>Sucursal Belgrano</strong></legend>
+                                            </h3>
+                                            <h4>
+                                                <p>
+                                                    <strong>Dirección:</strong> Belgrano (S) 3246
+                                                </p>
+                                            </h4>
+                                            <h4>
+                                                <p>
+                                                    <strong>Telefono:</strong> 4311958
+                                                </p>
+                                            </h4>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="col-lg-2">
+                                        <img src="img/png/icon/logo.png" />
+                                    </div>
+                                    <div class="col-lg-1">
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <h3>
+                                                <legend><strong>Sucursal Banda</strong></legend>
+                                            </h3>
+                                            <h4>
+                                                <p>
+                                                    <strong>Dirección:</strong> Belgrano y Urquiza
+                                                </p>
+                                            </h4>
+                                            <h4>
+                                                <p>
+                                                    <strong>Telefono:</strong> 4271822
+                                                </p>
+                                            </h4>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                <div id="map_canvas" class="container-fluid" style="height: 400px">
+                </div>
+                <div class="container-fluid" style="background-color: #F9E3D6">
+                    <div class="footer">
+                        <br />
+                        <img src="img/png/logo.png" width="10%" class="img-responsive" />
+                        Sitio web de CERECETT - Santiago del Estero - Argentina - 2016
+                        <br />
+                    </div>
+                </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                <script>        window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+                <script src="js/bootstrap.min.js"></script>
+                <script src="js/dropdown.js"></script>
+                <script src="js/modal.js"></script>
+                <script src="js/main.js"></script>
+                <!-- //-end- concat_js
+                </body>
+                </html>
